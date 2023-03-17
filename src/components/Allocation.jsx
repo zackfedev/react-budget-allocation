@@ -1,10 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import AllocationItem from "./AllocationItem";
 
 const Allocation = () => {
   const { allocation, currency } = useContext(AppContext);
-  console.log(allocation);
 
   return (
     <table className='table'>

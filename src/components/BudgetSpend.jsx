@@ -1,24 +1,21 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import Location from "./Location";
 
 const BudgetSpend = () => {
-  const { currency, allocation } = useContext(AppContext);
+  const { currency, spended, budget, dispatch } = useContext(AppContext);
 
-  const [budget, setBudget] = useState(0);
-  const [spent] = useState(
-    allocation.reduce((result, { quantity }) => {
-      return result + quantity;
-    }, 0)
-  );
-  const [remaining] = useState(
-    allocation.reduce((result) => {
-      return result + budget - spent;
-    }, 0)
-  );
+  const handleBudgets = (e) => {
+    const inputValue = e.target.value;
+
+    dispatch({
+      type: "SET_BUDGET",
+      payload: inputValue,
+    });
+  };
 
   return (
-    <div className='row gap-3 '>
+    <div className='row gap-3'>
       <div className='col alert alert-secondary input-group'>
         <span
           className='input-group-text'
@@ -28,21 +25,22 @@ const BudgetSpend = () => {
         <input
           type='number'
           className='form-control'
-          onChange={(e) => setBudget(e.target.value)}
+          value={budget}
+          onChange={handleBudgets}
         />
       </div>
       <div
-        className='col alert alert-success d-flex'
+        className='col-xl-3 col-md-12 alert alert-success d-flex'
         style={{ alignItems: "center" }}>
         <h6>
-          Remaining: {currency} {budget - spent}
+          Remaining: {currency} {parseInt(budget) !== "" ? budget - spended : 0}
         </h6>
       </div>
       <div
-        className='col alert alert-primary d-flex'
+        className='col-xl-3 col-sm-4  alert alert-primary d-flex'
         style={{ alignItems: "center" }}>
         <h6>
-          Spent So Far: {currency} {spent}
+          Spent So Far: {currency} {spended}
         </h6>
       </div>
       <div className='col alert alert-secondary input-group'>
