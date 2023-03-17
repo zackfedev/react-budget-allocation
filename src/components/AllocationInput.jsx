@@ -16,7 +16,7 @@ const AllocationInput = () => {
 
     if (types === "increase" && +inputValue <= +budget - spended) {
       dispatch({ type: "ADD_ALLOCATION", payload: payObj });
-    } else if (types === "decrease") {
+    } else if (types === "decrease" && +inputValue) {
       dispatch({ type: "RED_ALLOCATION", payload: payObj });
     } else if (inputValue === "" || department === "") {
       alert("Set Option First");

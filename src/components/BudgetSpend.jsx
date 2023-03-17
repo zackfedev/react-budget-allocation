@@ -43,7 +43,7 @@ const BudgetSpend = () => {
           Spent So Far: {currency} {spended}
         </h6>
       </div>
-      <div className='col alert alert-secondary input-group'>
+      <div className='col alert alert-warning input-group'>
         <Location />
       </div>
     </div>

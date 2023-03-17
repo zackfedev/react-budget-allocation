@@ -13,7 +13,7 @@ const Location = () => {
 
   return (
     <>
-      <span className='input-group-text'>Currency: </span>
+      <span className='input-group-text bg-warning'>Currency: </span>
       <select
         onChange={(e) => handleCurrency(e.target.value)}
         defaultValue={currency}
