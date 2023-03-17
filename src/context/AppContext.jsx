@@ -44,11 +44,12 @@ export const AppReducer = (state, action) => {
         ...state,
       };
     case "SET_BUDGET":
-      if (parseInt(state.budget) === state.spended) {
-        alert("You cannot reduce budget lower than spended");
+      if (parseInt(state.budget) <= state.spended) {
+        alert("You cannot reduce budget lower than spending");
       } else {
         state.budget = action.payload;
       }
+      action.type = "DONE";
       return {
         ...state,
       };
