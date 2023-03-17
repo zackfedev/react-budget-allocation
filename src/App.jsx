@@ -8,13 +8,21 @@ function App() {
   return (
     <div className='App'>
       <div className='container-lg px-3'>
-        <h1>Budget Alocation App</h1>
         <AppProvider>
-          <BudgetSpend />
-          <h2>Allocation</h2>
-          <Allocation />
-          <h2>Change Allocation</h2>
-          <AllocationInput />
+          <div className='d-flex flex-column gap-3'>
+            <div className='d-flex flex-column gap-2 my-3'>
+              <h1>Budget Alocation App</h1>
+              <BudgetSpend />
+            </div>
+            <div>
+              <h2>Allocation</h2>
+              <Allocation />
+            </div>
+            <div>
+              <h2>Change Allocation</h2>
+              <AllocationInput />
+            </div>
+          </div>
         </AppProvider>
       </div>
     </div>
