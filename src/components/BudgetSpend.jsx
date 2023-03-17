@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import Location from "./Location";
 
@@ -7,11 +7,16 @@ const BudgetSpend = () => {
 
   const handleBudgets = (e) => {
     const inputValue = e.target.value;
+    const max_budgets = 20000;
 
-    dispatch({
-      type: "SET_BUDGET",
-      payload: inputValue,
-    });
+    if (+budget < max_budgets) {
+      dispatch({
+        type: "SET_BUDGET",
+        payload: inputValue,
+      });
+    } else {
+      alert(`The value cannot exceed remaining funds ${currency}${budget - spended}`);
+    }
   };
 
   return (
@@ -43,7 +48,7 @@ const BudgetSpend = () => {
           Spent So Far: {currency} {spended}
         </h6>
       </div>
-      <div className='col alert alert-warning input-group'>
+      <div className='col alert alert-secondary input-group text-white'>
         <Location />
       </div>
     </div>
