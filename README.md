@@ -1,5 +1,8 @@
 # react-budget-allocation
 
+... I developed some of the features in this Web app using hooks found in React, such as useContext to send and manipulate data with only one component, useReducer to manipulate fairly complex states such as adding, subtracting, validating, and deleting.
+useState in some components is also used to manipulate some data in this app
+
 ### some features that can be tried
 
 * You can add budget first to input with the sign **budget** on the webpage
