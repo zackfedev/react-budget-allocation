@@ -2,20 +2,19 @@ import { useContext } from "react";
 import { AppContext, AppProvider } from "./context/AppContext";
 import Allocation from "./components/Allocation";
 import BudgetSpend from "./components/BudgetSpend";
+import AllocationInput from "./components/AllocationInput";
 
 function App() {
   return (
     <div className='App'>
-      <div className='px-5'>
+      <div className='container-lg px-3'>
         <h1>Budget Alocation App</h1>
         <AppProvider>
-          <div className='container-fluid'>
-            <BudgetSpend />
-          </div>
+          <BudgetSpend />
           <h2>Allocation</h2>
-          <div>
-            <Allocation />
-          </div>
+          <Allocation />
+          <h2>Change Allocation</h2>
+          <AllocationInput />
         </AppProvider>
       </div>
     </div>
