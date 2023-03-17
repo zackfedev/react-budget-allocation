@@ -1,0 +1,16 @@
+# react-budget-allocation
+
+### some features that can be tried
+
+* You can add budget first to input with the sign **budget** on the webpage
+* You can change currency at the **dropdown select** input to change currency at you want
+* Button on the table can click when youre set the budget first 
+* can interact with buttons with conditions that have been determined in each table title such as increase by 10, decrease by 10, and delete
+* if you want to add a larger value for each quantity that has been determined you can do this using the input table at the bottom there are several 
+options that **must be selected first to validate** the value to be added according to the value stated in the input
+
+### validate/error can be throw when
+
+* The budget is Empty / Youre not set budget 
+* The quantity is Zero 
+* You add value when the budget exceed the remaining
