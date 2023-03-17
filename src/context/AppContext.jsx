@@ -22,7 +22,7 @@ export const AppReducer = (state, action) => {
           action.payload.value <= item.quantity
         ) {
           item.quantity -= action.payload.value;
-        } else {
+        } else if (item.nameDPT === action.payload.nameDPT) {
           item.quantity = 0;
         }
         state_updt.push(item);
