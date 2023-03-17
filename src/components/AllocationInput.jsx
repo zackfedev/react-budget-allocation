@@ -21,7 +21,7 @@ const AllocationInput = () => {
     } else if (inputValue === "" || department === "") {
       alert("Set Option First");
     } else {
-      alert("canceled Value exceeds budget");
+      alert(`The value cannot exceed remaining funds ${currency}${budget - spended}`);
     }
 
     setInputValue("");
@@ -71,6 +71,7 @@ const AllocationInput = () => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           className='form-control'
+          type='number'
         />
         <button
           className='input-group-text btn btn-primary'
