@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 const AllocationInput = () => {
@@ -21,8 +21,8 @@ const AllocationInput = () => {
       value: convNum,
     };
 
-    if (convNum < remaining) {
-      if (actionIdentity.types === "increase" && convNum < remaining) {
+    if (convNum <= remaining) {
+      if (actionIdentity.types === "increase") {
         dispatch({
           type: "ADD_ALLOCATION",
           payload: actionPayload,
