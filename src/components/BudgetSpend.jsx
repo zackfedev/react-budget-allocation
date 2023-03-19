@@ -6,16 +6,19 @@ const BudgetSpend = () => {
   const { currency, spended, budget, dispatch } = useContext(AppContext);
 
   const handleBudgets = (e) => {
+    const remaining = +budget - +spended;
     const inputValue = e.target.value;
     const max_budgets = 20000;
 
-    if (+budget < max_budgets) {
-      dispatch({
-        type: "SET_BUDGET",
-        payload: inputValue,
-      });
-    } else {
-      alert(`The value cannot exceed remaining funds ${currency}${budget - spended}`);
+    if (+inputValue <= max_budgets) {
+      if (+inputValue > +spended) {
+        dispatch({
+          type: "SET_BUDGET",
+          payload: inputValue,
+        });
+      } else {
+        alert(`The value cannot exceed remaining funds ${currency}${remaining}`);
+      }
     }
   };
 
@@ -28,6 +31,7 @@ const BudgetSpend = () => {
           Budget {currency}
         </span>
         <input
+          min='0'
           type='number'
           className='form-control'
           value={budget}
@@ -38,7 +42,7 @@ const BudgetSpend = () => {
         className='col-xl-3 col-md-12 alert alert-success d-flex'
         style={{ alignItems: "center" }}>
         <h6>
-          Remaining: {currency} {parseInt(budget) !== "" ? budget - spended : 0}
+          Remaining: {currency} {budget ? budget - spended : 0}
         </h6>
       </div>
       <div
