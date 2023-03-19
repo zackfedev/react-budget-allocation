@@ -2,13 +2,16 @@ import { useReducer, createContext } from "react";
 
 export const AppReducer = (state, action) => {
   let state_updt = [];
+
   switch (action.type) {
     case "ADD_ALLOCATION":
       state.allocation.map((item) => {
-        if (item.nameDPT === action.payload.nameDPT) item.quantity += action.payload.value;
-
+        if (item.nameDPT === action.payload.nameDPT) {
+          item.quantity += action.payload.value;
+        }
         state_updt.push(item);
       });
+
       state.allocation = state_updt;
       action.type = "DONE";
       return {
@@ -44,14 +47,9 @@ export const AppReducer = (state, action) => {
         ...state,
       };
     case "SET_BUDGET":
-      if (parseInt(state.budget) <= state.spended) {
-        alert("You cannot reduce budget lower than spending");
-      } else {
-        state.budget = action.payload;
-      }
-      action.type = "DONE";
       return {
         ...state,
+        budget: action.payload,
       };
     case "CC_LOCATION":
       return {
