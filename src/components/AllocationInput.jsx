@@ -4,27 +4,40 @@ import { AppContext } from "../context/AppContext";
 const AllocationInput = () => {
   const { currency, dispatch, budget, spended } = useContext(AppContext);
 
-  const [department, setDepartment] = useState("");
-  const [inputValue, setInputValue] = useState("");
-  const [types, setTypes] = useState("");
+  const [actionIdentity, setIdentity] = useState({
+    department: "",
+    inputVal: "",
+    types: null,
+  });
+
+  console.log(actionIdentity);
 
   const handleSubmit = () => {
-    const payObj = {
-      nameDPT: department,
-      value: parseInt(inputValue),
+    const convNum = parseInt(actionIdentity.inputVal);
+    const remaining = budget - spended;
+
+    const actionPayload = {
+      nameDPT: actionIdentity.department,
+      value: convNum,
     };
 
-    if (types === "increase" && +inputValue <= +budget - spended) {
-      dispatch({ type: "ADD_ALLOCATION", payload: payObj });
-    } else if (types === "decrease" && +inputValue) {
-      dispatch({ type: "RED_ALLOCATION", payload: payObj });
-    } else if (inputValue === "" || department === "") {
-      alert("Set Option First");
+    if (convNum < remaining) {
+      if (actionIdentity.types === "increase" && convNum < remaining) {
+        dispatch({
+          type: "ADD_ALLOCATION",
+          payload: actionPayload,
+        });
+      } else {
+        dispatch({
+          type: "RED_ALLOCATION",
+          payload: actionPayload,
+        });
+      }
     } else {
-      alert(`The value cannot exceed remaining funds ${currency}${budget - spended}`);
+      alert(`The value cannot exceed remaining funds ${currency}${remaining}`);
     }
 
-    setInputValue("");
+    setIdentity({ ...actionIdentity, inputVal: "" });
   };
 
   return (
@@ -36,7 +49,7 @@ const AllocationInput = () => {
           Department
         </span>
         <select
-          onChange={(e) => setDepartment(e.target.value)}
+          onChange={(e) => setIdentity({ ...actionIdentity, department: e.target.value })}
           defaultValue=''
           className='form-select'>
           <option value=''>Choose . . . </option>
@@ -55,8 +68,8 @@ const AllocationInput = () => {
         </span>
         <select
           className='form-select'
-          onChange={(e) => setTypes(e.target.value)}>
-          <option value=''>Choose Action . . . </option>
+          onChange={(e) => setIdentity({ ...actionIdentity, types: e.target.value })}>
+          <option>Choose Action . . . </option>
           <option value='increase'>Add</option>
           <option value='decrease'>Reduce</option>
         </select>
@@ -68,8 +81,8 @@ const AllocationInput = () => {
           {currency}
         </span>
         <input
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={actionIdentity.inputVal}
+          onChange={(e) => setIdentity({ ...actionIdentity, inputVal: e.target.value })}
           className='form-control'
           type='number'
         />
